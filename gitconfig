@@ -1,0 +1,31 @@
+[user]
+	email = kenton@hamaluik.ca
+	name = Kenton Hamaluik
+
+[alias]
+	ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+	fuck = reset HEAD --hard
+	yolo = push -f
+	news = log -p @{1}..
+	d = diff -c HEAD
+	cleanup = !git clean -i -x -d -e "TAGS" -e 'tags' ; git fetch -p
+	rank = shortlog -sn --no-merges
+	a = add -p
+	st = status -sb
+
+[push]
+	default = simple
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+[merge]
+	commit = no
+	ff = no

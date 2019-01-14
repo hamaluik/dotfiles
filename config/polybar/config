@@ -1,0 +1,215 @@
+[colors]
+nord0 = #2e3440
+nord1 = #3b4252
+nord2 = #434c5e
+nord3 = #4c566a
+nord4 = #d8dee9
+nord5 = #e5e9f0
+nord6 = #eceff4
+nord7 =  #8fbcbb
+nord8 =  #88c0d0
+nord9 =  #81a1c1
+nord10 = #5e81ac
+nord11 = #bf616a
+nord12 = #d08770
+nord13 = #ebcb8b
+nord14 = #a3be8c
+nord15 = #b48ead
+
+night0 = ${self.nord0}
+night1 = ${self.nord1}
+night2 = ${self.nord2}
+night3 = ${self.nord3}
+
+snow0 = ${self.nord4}
+snow1 = ${self.nord5}
+snow2 = ${self.nord6}
+
+frost0 = ${self.nord7}
+frost1 = ${self.nord8}
+frost2 = ${self.nord9}
+frost3 = ${self.nord10}
+
+aurora0 = ${self.nord11}
+aurora1 = ${self.nord12}
+aurora2 = ${self.nord13}
+aurora3 = ${self.nord14}
+aurora4 = ${self.nord15}
+
+red = ${self.aurora0}
+orange = ${self.aurora1}
+yellow = ${self.aurora2}
+green = ${self.aurora3}
+purple = ${self.aurora4}
+
+[bar/top]
+width = 100%
+height = 21
+radius = 0
+fixed-center = true
+
+background = ${colors.night0}
+foreground = ${colors.night0}
+
+line-size = 0
+border-size = 0
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = envypn:size=11;1
+font-1 = "Font Awesome 5 Pro:style=Solid:size=8;2"
+font-2 = Unifont:size=6
+font-3 = Unifont:size=23;2
+
+modules-left = i3
+modules-center = xwindow
+modules-right = sep0 volume sep1 wired-network sep2 filesystem datastore sep3 cpu sep4 date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/sep0]
+type = custom/text
+content = %{T4}◤%{T1}
+content-foreground = ${colors.night0}
+content-background = ${colors.red}
+
+[module/sep1]
+type = custom/text
+content = %{T4}◤%{T1}
+content-foreground = ${colors.red}
+content-background = ${colors.orange}
+
+[module/sep2]
+type = custom/text
+content = %{T4}◤%{T1}
+content-foreground = ${colors.orange}
+content-background = ${colors.yellow}
+
+[module/sep3]
+type = custom/text
+content = %{T4}◤%{T1}
+content-foreground = ${colors.yellow}
+content-background = ${colors.green}
+
+[module/sep4]
+type = custom/text
+content = %{T4}◤%{T1}
+content-foreground = ${colors.green}
+content-background = ${colors.purple}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 1
+label-mode-background = ${colors.night0}
+label-mode-foreground = ${colors.snow0}
+
+label-focused = %index%
+label-focused-background = ${colors.night3}
+label-focused-foreground = ${colors.snow0}
+label-focused-padding = 1
+
+label-unfocused = %index%
+label-unfocused-background = ${colors.night0}
+label-unfocused-foreground = ${colors.snow0}
+label-unfocused-padding = 1
+
+label-visible = %index%
+label-visible-background = ${colors.night1}
+label-visible-foreground = ${colors.snow0}
+label-visible-padding = 1
+
+label-urgent = %index%
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.snow0}
+label-urgent-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label-foreground = ${colors.snow0}
+
+[module/volume]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+
+label-volume =  %percentage%%
+format-volume-background = ${colors.red}
+
+label-muted =  muted
+format-muted-background = ${colors.red}
+
+[module/wired-network]
+type = internal/network
+interface = eno1
+label-connected = " %downspeed%  %upspeed%"
+format-connected-background = ${colors.orange}
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+label-mounted = " %free%, "
+fixed-values = true
+format-mounted-background = ${colors.yellow}
+format-mounted-padding = 0
+
+[module/datastore]
+type = custom/script
+exec = "zpool list -H -o free"
+interval = 90
+label = "%output%B free  "
+format-background = ${colors.yellow}
+format-padding = 0
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+
+format = "<label> <ramp-coreload> "
+#format = "<label> <bar-load> "
+format-background = ${colors.green}
+label = 
+
+bar-load-format = %fill%%indicator%%empty%
+bar-load-width = 10
+
+bar-load-gradient = false
+
+; The fill, indicator and empty icon can be configured like any <label>
+bar-load-fill = ■
+bar-load-indicator = ■
+bar-load-empty = □
+
+ramp-coreload-spacing = 0
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date =  %a %b %e
+time =  %I:%M:%S %p
+
+format = "<label> "
+format-background = ${colors.purple}
+label = %date% %time%
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
