@@ -1,215 +1,289 @@
-[colors]
-nord0 = #2e3440
-nord1 = #3b4252
-nord2 = #434c5e
-nord3 = #4c566a
-nord4 = #d8dee9
-nord5 = #e5e9f0
-nord6 = #eceff4
-nord7 =  #8fbcbb
-nord8 =  #88c0d0
-nord9 =  #81a1c1
-nord10 = #5e81ac
-nord11 = #bf616a
-nord12 = #d08770
-nord13 = #ebcb8b
-nord14 = #a3be8c
-nord15 = #b48ead
+set $mod Mod4
 
-night0 = ${self.nord0}
-night1 = ${self.nord1}
-night2 = ${self.nord2}
-night3 = ${self.nord3}
+#new_window pixel 0
+new_window none
+new_float normal
 
-snow0 = ${self.nord4}
-snow1 = ${self.nord5}
-snow2 = ${self.nord6}
+hide_edge_borders none
 
-frost0 = ${self.nord7}
-frost1 = ${self.nord8}
-frost2 = ${self.nord9}
-frost3 = ${self.nord10}
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
 
-aurora0 = ${self.nord11}
-aurora1 = ${self.nord12}
-aurora2 = ${self.nord13}
-aurora3 = ${self.nord14}
-aurora4 = ${self.nord15}
+font xft:URWGothic-Book 11
 
-red = ${self.aurora0}
-orange = ${self.aurora1}
-yellow = ${self.aurora2}
-green = ${self.aurora3}
-purple = ${self.aurora4}
+floating_modifier $mod
 
-[bar/top]
-width = 100%
-height = 21
-radius = 0
-fixed-center = true
+#bindsym $mod+Return exec st
+bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec rxvt-unicode
 
-background = ${colors.night0}
-foreground = ${colors.night0}
+# Window kill command
+bindsym $mod+Shift+q kill
 
-line-size = 0
-border-size = 0
-padding-left = 0
-padding-right = 0
-module-margin-left = 0
-module-margin-right = 0
+# start program launcher
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
-font-0 = envypn:size=11;1
-font-1 = "Font Awesome 5 Pro:style=Solid:size=8;2"
-font-2 = Unifont:size=6
-font-3 = Unifont:size=23;2
+# change focus
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
-modules-left = i3
-modules-center = xwindow
-modules-right = sep0 volume sep1 wired-network sep2 filesystem datastore sep3 cpu sep4 date
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-cursor-click = pointer
-cursor-scroll = ns-resize
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
-[module/sep0]
-type = custom/text
-content = %{T4}◤%{T1}
-content-foreground = ${colors.night0}
-content-background = ${colors.red}
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
-[module/sep1]
-type = custom/text
-content = %{T4}◤%{T1}
-content-foreground = ${colors.red}
-content-background = ${colors.orange}
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-[module/sep2]
-type = custom/text
-content = %{T4}◤%{T1}
-content-foreground = ${colors.orange}
-content-background = ${colors.yellow}
+# split orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+q split toggle
 
-[module/sep3]
-type = custom/text
-content = %{T4}◤%{T1}
-content-foreground = ${colors.yellow}
-content-background = ${colors.green}
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
 
-[module/sep4]
-type = custom/text
-content = %{T4}◤%{T1}
-content-foreground = ${colors.green}
-content-background = ${colors.purple}
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
 
-label-mode-padding = 1
-label-mode-background = ${colors.night0}
-label-mode-foreground = ${colors.snow0}
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
 
-label-focused = %index%
-label-focused-background = ${colors.night3}
-label-focused-foreground = ${colors.snow0}
-label-focused-padding = 1
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
 
-label-unfocused = %index%
-label-unfocused-background = ${colors.night0}
-label-unfocused-foreground = ${colors.snow0}
-label-unfocused-padding = 1
+# focus the parent container
+bindsym $mod+a focus parent
 
-label-visible = %index%
-label-visible-background = ${colors.night1}
-label-visible-foreground = ${colors.snow0}
-label-visible-padding = 1
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
-label-urgent = %index%
-label-urgent-background = ${colors.red}
-label-urgent-foreground = ${colors.snow0}
-label-urgent-padding = 1
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
-[module/xwindow]
-type = internal/xwindow
-label-foreground = ${colors.snow0}
+# navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
 
-[module/volume]
-type = internal/pulseaudio
+# workspaces
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
 
-format-volume = <label-volume>
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
 
-label-volume =  %percentage%%
-format-volume-background = ${colors.red}
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
 
-label-muted =  muted
-format-muted-background = ${colors.red}
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
-[module/wired-network]
-type = internal/network
-interface = eno1
-label-connected = " %downspeed%  %upspeed%"
-format-connected-background = ${colors.orange}
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Thus"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+for_window [class="minicalc"] floating enable
 
-[module/filesystem]
-type = internal/fs
-mount-0 = /
-label-mounted = " %free%, "
-fixed-values = true
-format-mounted-background = ${colors.yellow}
-format-mounted-padding = 0
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
 
-[module/datastore]
-type = custom/script
-exec = "zpool list -H -o free"
-interval = 90
-label = "%output%B free  "
-format-background = ${colors.yellow}
-format-padding = 0
+# reload the configuration file
+bindsym $mod+Shift+c reload
 
-[module/cpu]
-type = internal/cpu
-interval = 0.5
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
 
-format = "<label> <ramp-coreload> "
-#format = "<label> <bar-load> "
-format-background = ${colors.green}
-label = 
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-bar-load-format = %fill%%indicator%%empty%
-bar-load-width = 10
+bindsym $mod+l exec /home/kenton/.bin/i3lock-wrapper.sh -u
 
-bar-load-gradient = false
+# Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
-; The fill, indicator and empty icon can be configured like any <label>
-bar-load-fill = ■
-bar-load-indicator = ■
-bar-load-empty = □
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-ramp-coreload-spacing = 0
-ramp-coreload-0 = ▁
-ramp-coreload-1 = ▂
-ramp-coreload-2 = ▃
-ramp-coreload-3 = ▄
-ramp-coreload-4 = ▅
-ramp-coreload-5 = ▆
-ramp-coreload-6 = ▇
-ramp-coreload-7 = █
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
-[module/date]
-type = internal/date
-interval = 1.0
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
-date =  %a %b %e
-time =  %I:%M:%S %p
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
-format = "<label> "
-format-background = ${colors.purple}
-label = %date% %time%
+# Autostart applications
+exec --no-startup-id numlockx
+exec --no-startup-id compton -b
+exec --no-startup-id feh --randomize --bg-fill /home/kenton/Pictures/Wallpaper/4k
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+#exec --no-startup-id albert
+#exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id /$HOME/.config/polybar/polybar_launch.sh
+exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
+exec --no-startup-id feh  --bg-fill /home/kenton/Pictures/Wallpaper/fw-sunset.jpg
 
-[settings]
-screenchange-reload = true
+# Restore GNOME's settings
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 
-[global/wm]
-margin-top = 0
-margin-bottom = 0
+# Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+#exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+# Theme colors
+client.focused #bfbfbf #162025 #bfbfbf #39402e #39402e
+client.focused_inactive #bfbfbf #162025 #bfbfbf #75404b #75404b
+client.unfocused #bfbfbf #162025 #bfbfbf #75404b #75404b
+client.urgent #bfbfbf #162025 #bfbfbf #75404b #75404b
+client.placeholder #bfbfbf #162025 #bfbfbf #75404b #75404b
+
+client.background #162025
+
+# Gaps
+#gaps inner 10
+#gaps outer -4
+gaps inner 0
+gaps outer 0
+
+smart_gaps on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
