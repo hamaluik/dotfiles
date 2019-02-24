@@ -14,16 +14,16 @@ font xft:URWGothic-Book 11
 
 floating_modifier $mod
 
-bindsym $mod+Return exec st
-#bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec st
+bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec rxvt-unicode
 
 # Window kill command
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
-bindsym $mod+Shift+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
 # change focus
 #bindsym $mod+j focus left
@@ -227,6 +227,12 @@ exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id /$HOME/.config/polybar/polybar_launch.sh
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
 exec --no-startup-id feh  --bg-fill /home/kenton/Pictures/Wallpaper/fw-sunset.jpg
+
+# Restore GNOME's settings
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+
+# Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+#exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
 
 # Theme colors
 client.focused #bfbfbf #162025 #bfbfbf #39402e #39402e
